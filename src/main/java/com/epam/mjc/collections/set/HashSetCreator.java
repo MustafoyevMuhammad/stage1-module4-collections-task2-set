@@ -6,16 +6,20 @@ import java.util.List;
 public class HashSetCreator {
     public HashSet<Integer> createHashSet(List<Integer> sourceList) {
         int size = sourceList.size();
-        List<Integer> list = (List<Integer>) new HashSet<Integer>();
-        int temp, k;
-        for (int i = 0; i < size; i++) {
-            temp = sourceList.get(i);
-            while (Math.abs(temp) != 1){
-                k = temp + temp / 2;
-                sourceList.set(i,k);
-                temp /= 2;
+        HashSet<Integer> list = new HashSet<Integer>();
+        for (Integer number : sourceList) {
+            if (number % 2 == 0) {
+                while (number % 2 == 0) {
+                    list.add(number);
+                    number /= 2;
+                    if (number == 1)
+                        list.add(number);
+                }
+            } else {
+                list.add(number);
+                list.add(number * 2);
             }
         }
-        return (HashSet<Integer>) sourceList;
+        return list;
     }
 }
